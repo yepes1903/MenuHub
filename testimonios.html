@@ -1,0 +1,412 @@
+<!DOCTYPE html>
+<html lang="es" class="light">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Testimonios - MenuHub</title>
+    <link rel="icon" type="image/png" href="images/logo.png">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    colors: {
+                        primary: {
+                            50: '#f8fafc',
+                            100: '#f1f5f9',
+                            200: '#e2e8f0',
+                            300: '#cbd5e1',
+                            400: '#94a3b8',
+                            500: '#64748b',
+                            600: '#475569',
+                            700: '#334155',
+                            800: '#1e293b',
+                            900: '#0f172a',
+                        },
+                        accent: {
+                            50: '#eff6ff',
+                            100: '#dbeafe',
+                            200: '#bfdbfe',
+                            300: '#93c5fd',
+                            400: '#60a5fa',
+                            500: '#3b82f6',
+                            600: '#2563eb',
+                            700: '#1d4ed8',
+                            800: '#1e40af',
+                            900: '#1e3a8a',
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        body {
+            font-family: 'Montserrat', sans-serif;
+        }
+        .hero-gradient {
+            background: linear-gradient(135deg, #1e40af 0%, #3b82f6 100%);
+        }
+        .nav-link {
+            position: relative;
+            font-weight: 500;
+        }
+        .nav-link::after {
+            content: '';
+            position: absolute;
+            width: 0;
+            height: 2px;
+            bottom: -4px;
+            left: 0;
+            background-color: #2563eb;
+            transition: width 0.3s ease;
+        }
+        .nav-link:hover::after {
+            width: 100%;
+        }
+    </style>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+</head>
+<body class="bg-gray-50 dark:bg-gray-900">
+    <!-- Navbar -->
+    <nav class="bg-white dark:bg-gray-800 shadow-md fixed w-full z-50">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between h-20">
+                <div class="flex items-center">
+                    <a href="#" class="flex items-center space-x-3">
+                        <span class="text-2xl font-bold text-primary-800 dark:text-white">Menu<span class="text-accent-600">Hub</span></span>
+                    </a>
+                </div>
+                <div class="hidden md:flex items-center space-x-8">
+                    <a href="index.php" class="nav-link text-primary-600 hover:text-primary-800 dark:text-white">Inicio</a>
+                    <a href="index.php#about" class="nav-link text-primary-600 hover:text-primary-800 dark:text-white">Nosotros</a>
+                    <a href="index.php#team" class="nav-link text-primary-600 hover:text-primary-800 dark:text-white">Equipo</a>
+                    <a href="index.php#contact" class="nav-link text-primary-600 hover:text-primary-800 dark:text-white">Contacto</a>
+                    <a href="reseñas.php" class="nav-link text-primary-600 hover:text-primary-800 dark:text-white">Reseñas</a>
+                    <a href="login.php" class="px-6 py-3 rounded-full bg-accent-600 text-white hover:bg-accent-700 transition-all duration-300 transform hover:scale-105 hover:shadow-xl">
+                        Iniciar Sesión
+                    </a>
+                    <a href="signup.php" class="px-6 py-3 rounded-full border-2 border-accent-600 text-accent-600 hover:bg-accent-50 transition-all duration-300 transform hover:scale-105 hover:shadow-xl">
+                        Registrarse
+                    </a>
+                </div>
+                <div class="md:hidden flex items-center">
+                    <button id="mobile-menu-button" class="text-primary-600 hover:text-primary-800 focus:outline-none">
+                        <i class="fas fa-bars text-2xl"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+        <!-- Mobile menu -->
+        <div id="mobile-menu" class="hidden md:hidden bg-white dark:bg-gray-800 border-t border-gray-200">
+            <div class="px-4 py-2 space-y-3">
+                <a href="index.php" class="block py-2 text-primary-600 hover:text-primary-800 dark:text-white">Inicio</a>
+                <a href="index.php#about" class="block py-2 text-primary-600 hover:text-primary-800 dark:text-white">Nosotros</a>
+                <a href="index.php#team" class="block py-2 text-primary-600 hover:text-primary-800 dark:text-white">Equipo</a>
+                <a href="index.php#contact" class="block py-2 text-primary-600 hover:text-primary-800 dark:text-white">Contacto</a>
+                <a href="reseñas.php" class="block py-2 text-primary-600 hover:text-primary-800 dark:text-white">Reseñas</a>
+                <div class="space-y-2 pt-2">
+                    <a href="login.php" class="block w-full text-center px-4 py-2 bg-accent-600 text-white rounded-full hover:bg-accent-700">
+                        Iniciar Sesión
+                    </a>
+                    <a href="signup.php" class="block w-full text-center px-4 py-2 border-2 border-accent-600 text-accent-600 rounded-full hover:bg-accent-50">
+                        Registrarse
+                    </a>
+                </div>
+            </div>
+        </div>
+    </nav>
+    <br><br>
+
+    <!-- Main Content -->
+    <main class="pt-24 pb-20">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <!-- Header Section -->
+            <div class="text-center mb-16">
+                <h1 class="text-4xl font-bold text-primary-800 dark:text-white mb-4">Testimonios de Nuestros Clientes</h1>
+                <p class="text-lg text-primary-600 dark:text-gray-300 max-w-2xl mx-auto">
+                    Descubre lo que nuestros clientes dicen sobre su experiencia con MenuHub
+                </p>
+            </div>
+
+            <!-- Testimonials Grid -->
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                <!-- Testimonial 1 -->
+                <div class="bg-white dark:bg-gray-800 rounded-xl p-6 shadow-lg hover:shadow-xl transition-shadow duration-300">
+                    <div class="flex items-center mb-4">
+                        <img src="https://randomuser.me/api/portraits/men/1.jpg" alt="Cliente" class="w-12 h-12 rounded-full">
+                        <div class="ml-4">
+                            <h3 class="text-lg font-semibold text-primary-800 dark:text-white">Juan Pérez</h3>
+                            <p class="text-primary-600 dark:text-gray-400">Cliente Frecuente</p>
+                        </div>
+                    </div>
+                    <div class="mb-4">
+                        <div class="flex text-yellow-400">
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                        </div>
+                    </div>
+                    <p class="text-primary-600 dark:text-gray-300">
+                        "MenuHub ha revolucionado la forma en que pido comida. La interfaz es intuitiva y los tiempos de entrega son excelentes."
+                    </p>
+                </div>
+
+                <!-- Testimonial 2 -->
+                <div class="bg-white dark:bg-gray-800 rounded-xl p-6 shadow-lg hover:shadow-xl transition-shadow duration-300">
+                    <div class="flex items-center mb-4">
+                        <img src="https://randomuser.me/api/portraits/women/1.jpg" alt="Cliente" class="w-12 h-12 rounded-full">
+                        <div class="ml-4">
+                            <h3 class="text-lg font-semibold text-primary-800 dark:text-white">María García</h3>
+                            <p class="text-primary-600 dark:text-gray-400">Cliente Regular</p>
+                        </div>
+                    </div>
+                    <div class="mb-4">
+                        <div class="flex text-yellow-400">
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star-half-alt"></i>
+                        </div>
+                    </div>
+                    <p class="text-primary-600 dark:text-gray-300">
+                        "La variedad de restaurantes es increíble. Siempre encuentro nuevos lugares para probar y la calidad nunca decepciona."
+                    </p>
+                </div>
+
+                <!-- Testimonial 3 -->
+                <div class="bg-white dark:bg-gray-800 rounded-xl p-6 shadow-lg hover:shadow-xl transition-shadow duration-300">
+                    <div class="flex items-center mb-4">
+                        <img src="https://randomuser.me/api/portraits/men/2.jpg" alt="Cliente" class="w-12 h-12 rounded-full">
+                        <div class="ml-4">
+                            <h3 class="text-lg font-semibold text-primary-800 dark:text-white">Carlos Rodríguez</h3>
+                            <p class="text-primary-600 dark:text-gray-400">Cliente VIP</p>
+                        </div>
+                    </div>
+                    <div class="mb-4">
+                        <div class="flex text-yellow-400">
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                        </div>
+                    </div>
+                    <p class="text-primary-600 dark:text-gray-300">
+                        "El servicio al cliente es excepcional. Cualquier problema se resuelve rápidamente y siempre con una sonrisa."
+                    </p>
+                </div>
+
+                <!-- Testimonial 4 -->
+                <div class="bg-white dark:bg-gray-800 rounded-xl p-6 shadow-lg hover:shadow-xl transition-shadow duration-300">
+                    <div class="flex items-center mb-4">
+                        <img src="https://randomuser.me/api/portraits/women/2.jpg" alt="Cliente" class="w-12 h-12 rounded-full">
+                        <div class="ml-4">
+                            <h3 class="text-lg font-semibold text-primary-800 dark:text-white">Ana Martínez</h3>
+                            <p class="text-primary-600 dark:text-gray-400">Cliente Nuevo</p>
+                        </div>
+                    </div>
+                    <div class="mb-4">
+                        <div class="flex text-yellow-400">
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="far fa-star"></i>
+                        </div>
+                    </div>
+                    <p class="text-primary-600 dark:text-gray-300">
+                        "Apenas empecé a usar MenuHub y estoy impresionada. La app es muy fácil de usar y las entregas son puntuales."
+                    </p>
+                </div>
+
+                <!-- Testimonial 5 -->
+                <div class="bg-white dark:bg-gray-800 rounded-xl p-6 shadow-lg hover:shadow-xl transition-shadow duration-300">
+                    <div class="flex items-center mb-4">
+                        <img src="https://randomuser.me/api/portraits/men/3.jpg" alt="Cliente" class="w-12 h-12 rounded-full">
+                        <div class="ml-4">
+                            <h3 class="text-lg font-semibold text-primary-800 dark:text-white">Luis Torres</h3>
+                            <p class="text-primary-600 dark:text-gray-400">Cliente Premium</p>
+                        </div>
+                    </div>
+                    <div class="mb-4">
+                        <div class="flex text-yellow-400">
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                        </div>
+                    </div>
+                    <p class="text-primary-600 dark:text-gray-300">
+                        "Las ofertas y descuentos son geniales. He ahorrado mucho dinero usando MenuHub para mis pedidos diarios."
+                    </p>
+                </div>
+
+                <!-- Testimonial 6 -->
+                <div class="bg-white dark:bg-gray-800 rounded-xl p-6 shadow-lg hover:shadow-xl transition-shadow duration-300">
+                    <div class="flex items-center mb-4">
+                        <img src="https://randomuser.me/api/portraits/women/3.jpg" alt="Cliente" class="w-12 h-12 rounded-full">
+                        <div class="ml-4">
+                            <h3 class="text-lg font-semibold text-primary-800 dark:text-white">Sofia López</h3>
+                            <p class="text-primary-600 dark:text-gray-400">Cliente Frecuente</p>
+                        </div>
+                    </div>
+                    <div class="mb-4">
+                        <div class="flex text-yellow-400">
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star-half-alt"></i>
+                        </div>
+                    </div>
+                    <p class="text-primary-600 dark:text-gray-300">
+                        "La opción de seguimiento en tiempo real es fantástica. Siempre sé exactamente cuándo llegará mi pedido."
+                    </p>
+                </div>
+            </div>
+
+            <!-- Call to Action -->
+            <div class="text-center mt-16">
+                <h2 class="text-2xl font-bold text-primary-800 dark:text-white mb-4">¿Listo para probar MenuHub?</h2>
+                <p class="text-lg text-primary-600 dark:text-gray-300 mb-8">
+                    Únete a miles de clientes satisfechos y descubre la mejor forma de ordenar comida.
+                </p>
+                <a href="signup.php" class="inline-block px-8 py-4 bg-accent-600 text-white rounded-full hover:bg-accent-700 transition duration-300 transform hover:scale-105">
+                    Comenzar Ahora
+                </a>
+            </div>
+        </div>
+    </main>
+
+   
+    <!-- Enhanced Footer -->
+    <footer class="bg-primary-900 text-white pt-20 pb-10">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid grid-cols-1 md:grid-cols-4 gap-12 mb-16">
+                <div class="space-y-6">
+                    <div class="flex items-center space-x-3">
+                        <span class="text-2xl font-bold">Menu<span class="text-accent-400">Hub</span></span>
+                    </div>
+                    <p class="text-gray-400">
+                        Tu plataforma de confianza para ordenar comida de los mejores restaurantes locales.
+                    </p>
+                </div>
+                <div>
+                    <h4 class="text-lg font-semibold mb-6">Informacion</h4>
+                    <ul class="space-y-4">
+                        <li><a href="index.php" class="text-gray-400 hover:text-accent-400 transition duration-300">Sobre Nosotros</a></li>
+                        <li><a href="index.php" class="text-gray-400 hover:text-accent-400 transition duration-300">Nuestro Equipo</a></li>
+                        <li><a href="instructivo.php" class="text-gray-400 hover:text-accent-400 transition duration-300">¿Como pedir?</a></li>
+                        <li><a href="index.php" class="text-gray-400 hover:text-accent-400 transition duration-300">Contacto</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h4 class="text-lg font-semibold mb-6">Servicios</h4>
+                    <ul class="space-y-4">
+                        <li><a href="index.php" class="text-gray-400 hover:text-accent-400 transition duration-300">Pedidos Online</a></li>
+                        <li><a href="index.php" class="text-gray-400 hover:text-accent-400 transition duration-300">Vista de menus</a></li>
+                        <li><a href="index.php" class="text-gray-400 hover:text-accent-400 transition duration-300">Contacto directo</a></li>
+                        <li><a href="testimonios.html" class="text-gray-400 hover:text-accent-400 transition duration-300">Testimonios</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h4 class="text-lg font-semibold mb-6">Juegos</h4>
+                    <ul class="space-y-4">
+                        <li><a href="juegos/1.html" class="text-gray-400 hover:text-accent-400 transition duration-300">Memoria</a></li>
+                        <li><a href="juegos/2.html" class="text-gray-400 hover:text-accent-400 transition duration-300">Serpiente</a></li>
+                        <li><a href="juegos/3.html" class="text-gray-400 hover:text-accent-400 transition duration-300">El topo</a></li>
+                        <li><a href="juegos/4.html" class="text-gray-400 hover:text-accent-400 transition duration-300">Adivina el numero</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="border-t border-primary-800 pt-8">
+                <div class="flex flex-col md:flex-row justify-between items-center">
+                    <p class="text-gray-400 text-sm">
+                        &copy; 2025 MenuHub. Todos los derechos reservados.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Back to Top Button -->
+    <button id="backToTop" class="fixed bottom-8 right-8 bg-accent-600 text-white p-4 rounded-full shadow-lg hidden hover:bg-accent-700 transition duration-300 transform hover:scale-110">
+        <i class="fas fa-arrow-up"></i>
+    </button>
+
+    <script>
+        // Theme toggle functionality
+        const html = document.documentElement;
+        const themeToggle = document.getElementById('theme-toggle');
+
+        if (themeToggle) {
+            // Check for saved theme preference or use system preference
+            if (localStorage.theme === 'dark' || (!('theme' in localStorage) && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
+                html.classList.add('dark');
+            } else {
+                html.classList.remove('dark');
+            }
+
+            // Toggle theme
+            themeToggle.addEventListener('click', () => {
+                html.classList.toggle('dark');
+                localStorage.theme = html.classList.contains('dark') ? 'dark' : 'light';
+            });
+        }
+
+        // Mobile menu toggle
+        const mobileMenuBtn = document.getElementById('mobileMenuBtn');
+        const mobileMenu = document.getElementById('mobileMenu');
+        
+        if (mobileMenuBtn && mobileMenu) {
+            mobileMenuBtn.addEventListener('click', () => {
+                mobileMenu.classList.toggle('hidden');
+            });
+        }
+
+        // Back to top button
+        const backToTop = document.getElementById('backToTop');
+        
+        if (backToTop) {
+            window.addEventListener('scroll', () => {
+                if (window.pageYOffset > 300) {
+                    backToTop.classList.remove('hidden');
+                } else {
+                    backToTop.classList.add('hidden');
+                }
+            });
+
+            backToTop.addEventListener('click', () => {
+                window.scrollTo({
+                    top: 0,
+                    behavior: 'smooth'
+                });
+            });
+        }
+
+        // Smooth scroll for navigation links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth'
+                    });
+                    // Close mobile menu if open
+                    if (mobileMenu) {
+                        mobileMenu.classList.add('hidden');
+                    }
+                }
+            });
+        });
+    </script>
+</body>
+</html>

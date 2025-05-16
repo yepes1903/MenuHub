@@ -1,0 +1,309 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Golpea al Topo - Menuhub</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: #8bc34a;
+            margin: 0;
+            padding: 20px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            color: #333;
+        }
+        
+        h1 {
+            color: #fff;
+            text-shadow: 2px 2px 0 #333;
+            margin-bottom: 10px;
+        }
+        
+        .game-info {
+            display: flex;
+            width: 400px;
+            justify-content: space-between;
+            margin-bottom: 20px;
+            background-color: rgba(255, 255, 255, 0.8);
+            border-radius: 10px;
+            padding: 10px 20px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+        }
+        
+        .info-item {
+            font-size: 18px;
+            font-weight: bold;
+        }
+        
+        .game-container {
+            width: 420px;
+            height: 420px;
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            grid-template-rows: repeat(3, 1fr);
+            gap: 10px;
+        }
+        
+        .hole {
+            background-color: #5d4037;
+            border-radius: 50%;
+            overflow: hidden;
+            position: relative;
+            box-shadow: inset 0 0 10px rgba(0, 0, 0, 0.5);
+        }
+        
+        .mole {
+            width: 100%;
+            height: 100%;
+            background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><circle cx="50" cy="50" r="40" fill="%23795548"/><circle cx="35" cy="40" r="5" fill="%23fff"/><circle cx="65" cy="40" r="5" fill="%23fff"/><path d="M 40 60 Q 50 70 60 60" stroke="%23fff" stroke-width="3" fill="none"/><ellipse cx="50" cy="85" rx="20" ry="10" fill="%23795548"/></svg>');
+            background-position: bottom;
+            background-repeat: no-repeat;
+            position: absolute;
+            bottom: -100%;
+            transition: bottom 0.1s;
+            cursor: pointer;
+        }
+        
+        .mole.active {
+            bottom: 0;
+        }
+        
+        .mole.bonked {
+            background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><circle cx="50" cy="50" r="40" fill="%23795548"/><path d="M 30 45 L 35 40 L 40 45" stroke="%23fff" stroke-width="2" fill="none"/><path d="M 60 45 L 65 40 L 70 45" stroke="%23fff" stroke-width="2" fill="none"/><path d="M 40 65 Q 50 55 60 65" stroke="%23fff" stroke-width="3" fill="none"/><ellipse cx="50" cy="85" rx="20" ry="10" fill="%23795548"/></svg>');
+        }
+        
+        .btn {
+            margin-top: 20px;
+            padding: 10px 30px;
+            font-size: 18px;
+            font-weight: bold;
+            background-color: #ff9800;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+            transition: all 0.2s;
+        }
+        
+        .btn:hover {
+            background-color: #f57c00;
+            transform: translateY(-2px);
+        }
+        
+        .btn:active {
+            transform: translateY(0);
+        }
+        
+        .game-over {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.8);
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            color: white;
+            font-size: 24px;
+            z-index: 10;
+            opacity: 0;
+            pointer-events: none;
+            transition: opacity 0.3s;
+        }
+        
+        .game-over.show {
+            opacity: 1;
+            pointer-events: all;
+        }
+        
+        .final-score {
+            font-size: 48px;
+            font-weight: bold;
+            color: #ff9800;
+            margin: 20px 0;
+        }
+    </style>
+</head>
+<body>
+    <h1>Golpea al Topo</h1>
+    
+    <div class="game-info">
+        <div class="info-item">Puntuación: <span id="score">0</span></div>
+        <div class="info-item">Tiempo: <span id="time">30</span>s</div>
+    </div>
+    
+    <div class="game-container" id="game-container">
+        <!-- Los agujeros y topos se generarán con JavaScript -->
+    </div>
+    
+    <button class="btn" id="start-btn">¡Comenzar!</button>
+    <a href="../index.php#juegos">
+        <button class="btn">Volver</button>
+    </a>
+    
+    <div class="game-over" id="game-over">
+        <h2>¡Juego Terminado!</h2>
+        <div>Tu puntuación final:</div>
+        <div class="final-score" id="final-score">0</div>
+        <button class="btn" id="restart-btn">Jugar de nuevo</button>
+        <a href="../index.php">
+            <button class="btn">Volver</button>
+        </a>
+    </div>
+    
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            // Elementos del DOM
+            const gameContainer = document.getElementById('game-container');
+            const scoreElement = document.getElementById('score');
+            const timeElement = document.getElementById('time');
+            const startButton = document.getElementById('start-btn');
+            const gameOverScreen = document.getElementById('game-over');
+            const finalScoreElement = document.getElementById('final-score');
+            const restartButton = document.getElementById('restart-btn');
+            
+            // Variables del juego
+            let score = 0;
+            let timeLeft = 30;
+            let gameTimer;
+            let moleTimer;
+            let holes = [];
+            let moles = [];
+            let gameStarted = false;
+            
+            // Crear agujeros y topos
+            function createHoles() {
+                gameContainer.innerHTML = '';
+                holes = [];
+                moles = [];
+                
+                for (let i = 0; i < 9; i++) {
+                    const hole = document.createElement('div');
+                    hole.classList.add('hole');
+                    
+                    const mole = document.createElement('div');
+                    mole.classList.add('mole');
+                    mole.dataset.index = i;
+                    
+                    mole.addEventListener('click', bonkMole);
+                    
+                    hole.appendChild(mole);
+                    gameContainer.appendChild(hole);
+                    
+                    holes.push(hole);
+                    moles.push(mole);
+                }
+            }
+            
+            // Iniciar juego
+            function startGame() {
+                if (gameStarted) return;
+                
+                gameStarted = true;
+                score = 0;
+                timeLeft = 30;
+                
+                scoreElement.textContent = score;
+                timeElement.textContent = timeLeft;
+                
+                startButton.disabled = true;
+                gameOverScreen.classList.remove('show');
+                
+                createHoles();
+                showMole();
+                
+                // Iniciar temporizador
+                gameTimer = setInterval(() => {
+                    timeLeft--;
+                    timeElement.textContent = timeLeft;
+                    
+                    if (timeLeft <= 0) {
+                        endGame();
+                    }
+                }, 1000);
+            }
+            
+            // Finalizar juego
+            function endGame() {
+                gameStarted = false;
+                clearInterval(gameTimer);
+                clearTimeout(moleTimer);
+                
+                startButton.disabled = false;
+                finalScoreElement.textContent = score;
+                gameOverScreen.classList.add('show');
+                
+                // Ocultar todos los topos
+                moles.forEach(mole => {
+                    mole.classList.remove('active');
+                });
+            }
+            
+            // Mostrar un topo aleatorio
+            function showMole() {
+                if (!gameStarted) return;
+                
+                // Ocultar todos los topos
+                moles.forEach(mole => {
+                    mole.classList.remove('active');
+                    mole.classList.remove('bonked');
+                });
+                
+                // Seleccionar un topo aleatorio
+                const randomIndex = Math.floor(Math.random() * moles.length);
+                const selectedMole = moles[randomIndex];
+                
+                // Mostrar el topo
+                selectedMole.classList.add('active');
+                
+                // Tiempo que el topo está visible (entre 0.5 y 1.5 segundos)
+                const showTime = Math.random() * 1000 + 500;
+                
+                // Ocultar el topo después del tiempo
+                moleTimer = setTimeout(() => {
+                    selectedMole.classList.remove('active');
+                    
+                    // Pequeña pausa antes de mostrar el siguiente topo
+                    setTimeout(() => {
+                        if (gameStarted) {
+                            showMole();
+                        }
+                    }, 300);
+                    
+                }, showTime);
+            }
+            
+            // Golpear al topo
+            function bonkMole(e) {
+                const mole = e.target;
+                
+                // Evitar contar múltiples clicks en el mismo topo
+                if (mole.classList.contains('bonked')) return;
+                
+                if (mole.classList.contains('active')) {
+                    score++;
+                    scoreElement.textContent = score;
+                    
+                    // Efecto visual de golpe
+                    mole.classList.add('bonked');
+                    
+                    // Sonido de golpe (opcional)
+                    // playBonkSound();
+                }
+            }
+            
+            // Event listeners
+            startButton.addEventListener('click', startGame);
+            restartButton.addEventListener('click', startGame);
+            
+            // Crear agujeros iniciales
+            createHoles();
+        });
+    </script>
+</body>
+</html>

@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Adivina el Número - Menuhub</title>
+  <style>
+    body {
+      font-family: 'Segoe UI', sans-serif;
+      text-align: center;
+      padding: 2rem;
+      background: #f0f4f8;
+    }
+    h1 {
+      color: #2c3e50;
+    }
+    input, button {
+      padding: 0.5rem 1rem;
+      margin-top: 1rem;
+      font-size: 1rem;
+    }
+    .result {
+      margin-top: 1rem;
+      font-size: 1.2rem;
+      font-weight: bold;
+    }
+  </style>
+</head>
+<body>
+
+  <h1>🎯 Adivina el Número</h1>
+  <p>Adivina un número entre <strong>1 y 100</strong></p>
+
+  <input type="number" id="guess" placeholder="Tu número..." />
+  <br />
+  <button onclick="checkGuess()">Intentar</button>
+  <a href="../index.php#juegos">
+    <button>Volver</button>
+</a>
+  <div class="result" id="result"></div>
+  <div id="tries">Intentos: 0</div>
+
+  <script>
+    const numberToGuess = Math.floor(Math.random() * 100) + 1;
+    let attempts = 0;
+
+    function checkGuess() {
+      const userGuess = parseInt(document.getElementById("guess").value);
+      const resultDiv = document.getElementById("result");
+      const triesDiv = document.getElementById("tries");
+      attempts++;
+
+      if (isNaN(userGuess)) {
+        resultDiv.textContent = "⛔ Ingresa un número válido.";
+      } else if (userGuess < numberToGuess) {
+        resultDiv.textContent = "🔻 Muy bajo. Intenta con uno más alto.";
+      } else if (userGuess > numberToGuess) {
+        resultDiv.textContent = "🔺 Muy alto. Intenta con uno más bajo.";
+      } else {
+        resultDiv.textContent = `🎉 ¡Felicidades! Adivinaste el número en ${attempts} intentos.`;
+      }
+
+      triesDiv.textContent = `Intentos: ${attempts}`;
+      document.getElementById("guess").value = "";
+    }
+  </script>
+
+</body>
+</html>
