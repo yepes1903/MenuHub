@@ -2,18 +2,18 @@
 // Definición de los lugares (tiendas y restaurantes)
 $lugares = [
     [
-        "nombre" => "Rancho de Teo",
-        "tipo" => "Rancho",
-        "lat" => 6.238377,
-        "lng" => -75.5571532,
-        "productos" => ["folling", "comida", "baño"]
+        "nombre" => "New Mahalo Envigado",
+        "tipo" => "Restaurante",
+        "lat" => 6.1528366,
+        "lng" => -75.5624264,497,
+        "productos" => ["comida", "musica", "paintball"]
     ],
     [
-        "nombre" => "Casita de Juanma",
-        "tipo" => "puteadero",
-        "lat" => 6.2316523,
-        "lng" => -75.5619568,
-        "productos" => ["Orgias", "Incesto", "pajas grupales"]
+        "nombre" => "Muska Rooftop",
+        "tipo" => "Restaurante",
+        "lat" => 6.3238972,
+        "lng" => -75.557973,339,
+        "productos" => ["Musica", "cumpleaños", "comida"]
     ],
     [
         "nombre" => "Heladeria Lupita",

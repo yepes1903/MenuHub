@@ -306,7 +306,7 @@
             <div class="grid grid-cols-1 md:grid-cols-3 gap-12">
                 <div class="team-member text-center" data-aos="fade-up" data-aos-delay="200">
                     <div class="relative mb-6 overflow-hidden rounded-2xl">
-                        <img src="https://randomuser.me/api/portraits/men/1.jpg" alt="Team Member" class="w-full team-member-img">
+                        <img src="images/mateo.jpg" alt="Team Member" class="w-full team-member-img">
                     </div>
                     <h3 class="text-xl font-semibold text-primary-800 mb-2">Mateo Yepes Rojas</h3>
                     <p class="text-accent-600 mb-4">Fundador y desarrollador front end y backend de lo que se lleva de la app</p>
@@ -324,7 +324,7 @@
                 </div>
                 <div class="team-member text-center" data-aos="fade-up" data-aos-delay="300">
                     <div class="relative mb-6 overflow-hidden rounded-2xl">
-                        <img src="https://randomuser.me/api/portraits/women/1.jpg" alt="Team Member" class="w-full team-member-img">
+                        <img src="images/chimbi.jpg" alt="Team Member" class="w-full team-member-img">
                     </div>
                     <h3 class="text-xl font-semibold text-primary-800 mb-2">Juan Felipe Jimenez</h3>
                     <p class="text-accent-600 mb-4">Desarrollador backend y documentacion</p>
@@ -342,7 +342,7 @@
                 </div>
                 <div class="team-member text-center" data-aos="fade-up" data-aos-delay="400">
                     <div class="relative mb-6 overflow-hidden rounded-2xl">
-                        <img src="https://randomuser.me/api/portraits/men/2.jpg" alt="Team Member" class="w-full team-member-img">
+                        <img src="images/sebas.jpg" alt="Team Member" class="w-full team-member-img">
                     </div>
                     <h3 class="text-xl font-semibold text-primary-800 mb-2">Sebastian Galeano</h3>
                     <p class="text-accent-600 mb-4">Director de documentos y actualizaciones</p>
