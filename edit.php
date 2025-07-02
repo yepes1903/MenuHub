@@ -9,6 +9,7 @@ if (!isset($_SESSION['username'])) {
 ?>
 
 <!DOCTYPE html>
+<<<<<<< HEAD
 <html lang="es" class="light scroll-smooth">
 <head>
     <meta charset="UTF-8">
@@ -81,6 +82,27 @@ if (!isset($_SESSION['username'])) {
     <div class="min-h-screen flex items-center justify-center py-12 px-4 sm:px-6 lg:px-8">
         <div class="max-w-md w-full space-y-8 animate-fade-in">
             <?php
+=======
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Actualizar Perfil</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-9ndCyUaIbzAi2FUVXJi0CjmCapSmO7SnpJef0486qhLnuZ2cdeRhO02iuK6FUUVM" crossorigin="anonymous">
+    <link rel="stylesheet" href="css/style1.css">
+</head>
+
+<body>
+
+    <div class="container">
+        <div class="form-box box">
+
+            <?php
+
+>>>>>>> 8b75c44c7f26b56c2e4a3f1f5f8c993fc734508d
             if (isset($_POST['update'])) {
                 $username = $_POST['username'];
                 $email = $_POST['email'];
@@ -90,6 +112,7 @@ if (!isset($_SESSION['username'])) {
                 $edit_query = mysqli_query($conn, "UPDATE users SET username='$username', email='$email', password='$password' WHERE id = $id");
 
                 if ($edit_query) {
+<<<<<<< HEAD
                     echo "<div class='bg-green-100 border-l-4 border-green-500 text-green-700 p-4 mb-4 rounded'>
                         <p>¡Perfil actualizado exitosamente!</p>
                     </div>";
@@ -169,15 +192,86 @@ if (!isset($_SESSION['username'])) {
         const toggle = document.querySelector(".toggle");
         const input = document.querySelector(".password");
         
+=======
+                    echo "<div class='message'>
+                <p>Profile Updated!</p>
+                </div><br>";
+                    echo "<a href='home.php'><button class='btn'>Go Home</button></a>";
+                }
+            } else {
+
+                $id = $_SESSION['id'];
+                $query = mysqli_query($conn, "SELECT * FROM users WHERE id = $id") or die("error occurs");
+
+                while ($result = mysqli_fetch_assoc($query)) {
+                    $res_username = $result['username'];
+                    $res_email = $result['email'];
+                    $res_password = $result['password'];
+                    $res_id = $result['id'];
+                }
+
+                ?>
+
+                <header>Change Profile</header>
+                <form action="#" method="POST" enctype="multipart/form-data">
+
+                    <div class="form-box">
+
+                        <div class="input-container">
+                            <i class="fa fa-user icon"></i>
+                            <input class="input-field" type="text" placeholder="Username" name="username"
+                                value="<?php echo $res_username; ?>" required>
+                        </div>
+
+                        <div class="input-container">
+                            <i class="fa fa-envelope icon"></i>
+                            <input class="input-field" type="email" placeholder="Email Address" name="email"
+                                value="<?php echo $res_email; ?>" required>
+                        </div>
+
+                        <div class="input-container">
+                            <i class="fa fa-lock icon"></i>
+                            <input class="input-field password" type="password" placeholder="Password" name="password"
+                                value="<?php echo $res_password; ?>" required>
+                            <i class="fa fa-eye toggle icon"></i>
+                        </div>
+
+                    </div>
+
+
+                    <div class="field">
+                        <input type="submit" name="update" id="submit" value="Update" class="btn">
+                    </div>
+
+
+                </form>
+            </div>
+        <?php } ?>
+    </div>
+
+    <script>
+        const toggle = document.querySelector(".toggle"),
+            input = document.querySelector(".password");
+>>>>>>> 8b75c44c7f26b56c2e4a3f1f5f8c993fc734508d
         toggle.addEventListener("click", () => {
             if (input.type === "password") {
                 input.type = "text";
                 toggle.classList.replace("fa-eye-slash", "fa-eye");
             } else {
                 input.type = "password";
+<<<<<<< HEAD
                 toggle.classList.replace("fa-eye", "fa-eye-slash");
             }
         });
     </script>
 </body>
 </html>
+=======
+            }
+        })
+    </script>
+
+</body>
+
+</html>
+>>>>>>> 8b75c44c7f26b56c2e4a3f1f5f8c993fc734508d

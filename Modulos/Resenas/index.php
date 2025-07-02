@@ -49,6 +49,8 @@
     <!-- AOS Animation Library -->
     <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
     <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    <!-- Google Maps API -->
+    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAgwIZiubF1Ugb2ExuKlczuOPP6M1D-R_Y&callback=initMap" async defer></script>
     <style>
         body {
             font-family: 'Montserrat', sans-serif;
@@ -162,6 +164,46 @@
             color: #fff;
             box-shadow: 0 0 15px rgba(255, 255, 255, 0.86);
         }
+        
+        /* Estilos para el mapa */
+        #map {
+            height: 500px;
+            width: 100%;
+            border-radius: 16px;
+            margin: 2rem auto;
+            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+        }
+
+        .card-container {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 1.5rem;
+            margin-bottom: 2rem;
+        }
+
+        .map-card {
+            border: 1px solid #e2e8f0;
+            padding: 1.5rem;
+            border-radius: 12px;
+            cursor: pointer;
+            width: 300px;
+            transition: all 0.3s ease;
+            background-color: white;
+            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+        }
+
+        .map-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.1);
+        }
+
+        .map-details {
+            display: none;
+            margin-top: 1rem;
+            padding-top: 1rem;
+            border-top: 1px solid #edf2f7;
+        }
     </style>
 </head>
 <body class="bg-gray-50 dark:bg-gray-900">
@@ -175,10 +217,10 @@
                     </a>
                 </div>
                 <div class="hidden md:flex items-center space-x-8">
-                    <a href="index.php" class="nav-link text-primary-600 hover:text-primary-800 dark:text-white">Inicio</a>
+                    <a href="#home" class="nav-link text-primary-600 hover:text-primary-800 dark:text-white">Inicio</a>
                     <a href="#about" class="nav-link text-primary-600 hover:text-primary-800 dark:text-white">Nosotros</a>
                     <a href="#team" class="nav-link text-primary-600 hover:text-primary-800 dark:text-white">Equipo</a>
-                    <a href="maps.php" class="nav-link text-primary-600 hover:text-primary-800 dark:text-white">Maps</a>
+                    <a href="#maps-section" class="nav-link text-primary-600 hover:text-primary-800 dark:text-white">Maps</a>
                     <a href="#contact" class="nav-link text-primary-600 hover:text-primary-800 dark:text-white">Contacto</a>
                     <a href="reseñas.php" class="nav-link text-primary-600 hover:text-primary-800 dark:text-white">Reseñas</a>
                     <a href="login.php" class="px-6 py-3 rounded-full bg-accent-600 text-white hover:bg-accent-700 transition-all duration-300 transform hover:scale-105 hover:shadow-xl">
@@ -198,7 +240,7 @@
         <!-- Mobile menu -->
         <div id="mobile-menu" class="hidden md:hidden bg-white dark:bg-gray-800 border-t border-gray-200">
             <div class="px-4 py-2 space-y-3">
-                <a href="index.php" class="block py-2 text-primary-600 hover:text-primary-800 dark:text-white">Inicio</a>
+                <a href="#home" class="block py-2 text-primary-600 hover:text-primary-800 dark:text-white">Inicio</a>
                 <a href="#about" class="block py-2 text-primary-600 hover:text-primary-800 dark:text-white">Nosotros</a>
                 <a href="#team" class="block py-2 text-primary-600 hover:text-primary-800 dark:text-white">Equipo</a>
                 <a href="#maps-section" class="block py-2 text-primary-600 hover:text-primary-800 dark:text-white">Maps</a>
@@ -237,7 +279,7 @@
                     </div>
                 </div>
                 <div class="md:w-1/2 mt-12 md:mt-0" data-aos="fade-left">
-                    <img src="images/Astor.jpeg" alt="Hero Image" class="rounded-2xl shadow-2xl transform hover:scale-105 transition duration-500">
+                    <img src="images/asi.jpg" alt="Hero Image" class="rounded-2xl shadow-2xl transform hover:scale-105 transition duration-500">
                 </div>
             </div>
         </div>
@@ -247,8 +289,8 @@
     <section id="about" class="py-20 bg-white dark:bg-gray-800">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="text-center mb-16">
-                <h2 class="text-3xl font-bold text-primary-800 mb-4" data-aos="fade-up">Nuestra Historia</h2>
-                <p class="text-lg text-primary-600 max-w-2xl mx-auto" data-aos="fade-up" data-aos-delay="100">
+                <h2 class="text-3xl font-bold text-primary-800 dark:text-white mb-4" data-aos="fade-up">Nuestra Historia</h2>
+                <p class="text-lg text-primary-600 dark:text-gray-300 max-w-2xl mx-auto" data-aos="fade-up" data-aos-delay="100">
                     Desde 2024, hemos estado conectando personas con sus restaurantes y locales favoritos a la hora de comprar, haciendo que ordenar comida o productos sea una experiencia simple pero llena de diversion.
                 </p>
             </div>
@@ -257,8 +299,8 @@
                     <div class="bg-accent-100 rounded-full p-6 w-20 h-20 mx-auto mb-6 flex items-center justify-center">
                         <i class="fas fa-rocket text-3xl text-accent-600"></i>
                     </div>
-                    <h3 class="text-xl font-semibold text-primary-800 mb-4">Nuestra Misión</h3>
-                    <p class="text-primary-600">
+                    <h3 class="text-xl font-semibold text-primary-800 dark:text-white mb-4">Nuestra Misión</h3>
+                    <p class="text-primary-600 dark:text-gray-300">
                         Facilitar el acceso a la compra local, conectando personas con sus restaurantes y locales favoritos de manera eficiente.
                     </p>
                 </div>
@@ -266,8 +308,8 @@
                     <div class="bg-accent-100 rounded-full p-6 w-20 h-20 mx-auto mb-6 flex items-center justify-center">
                         <i class="fas fa-eye text-3xl text-accent-600"></i>
                     </div>
-                    <h3 class="text-xl font-semibold text-primary-800 mb-4">Nuestra Visión</h3>
-                    <p class="text-primary-600">
+                    <h3 class="text-xl font-semibold text-primary-800 dark:text-white mb-4">Nuestra Visión</h3>
+                    <p class="text-primary-600 dark:text-gray-300">
                         Ser la plataforma líder en pedidos de comida, reconocida por nuestra calidad, creatividad y servicio excepcional.
                     </p>
                 </div>
@@ -275,8 +317,8 @@
                     <div class="bg-accent-100 rounded-full p-6 w-20 h-20 mx-auto mb-6 flex items-center justify-center">
                         <i class="fas fa-heart text-3xl text-accent-600"></i>
                     </div>
-                    <h3 class="text-xl font-semibold text-primary-800 mb-4">Nuestros Valores</h3>
-                    <p class="text-primary-600">
+                    <h3 class="text-xl font-semibold text-primary-800 dark:text-white mb-4">Nuestros Valores</h3>
+                    <p class="text-primary-600 dark:text-gray-300">
                         Calidad, innovación, compromiso con el cliente y pasión por la excelencia en todo lo que hacemos.
                     </p>
                 </div>
@@ -298,62 +340,62 @@
     <section id="team" class="py-20 bg-gray-50 dark:bg-gray-800">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="text-center mb-16">
-                <h2 class="text-3xl font-bold text-primary-800 mb-4" data-aos="fade-up">Nuestro Equipo</h2>
-                <p class="text-lg text-primary-600 max-w-2xl mx-auto" data-aos="fade-up" data-aos-delay="100">
+                <h2 class="text-3xl font-bold text-primary-800 dark:text-white mb-4" data-aos="fade-up">Nuestro Equipo</h2>
+                <p class="text-lg text-primary-600 dark:text-gray-300 max-w-2xl mx-auto" data-aos="fade-up" data-aos-delay="100">
                     Conoce al equipo apasionado detrás de MenuHub
                 </p>
             </div>
             <div class="grid grid-cols-1 md:grid-cols-3 gap-12">
                 <div class="team-member text-center" data-aos="fade-up" data-aos-delay="200">
                     <div class="relative mb-6 overflow-hidden rounded-2xl">
-                        <img src="images/mateo.jpg" alt="Team Member" class="w-full team-member-img">
+                        <img src="https://randomuser.me/api/portraits/men/1.jpg" alt="Team Member" class="w-full team-member-img">
                     </div>
-                    <h3 class="text-xl font-semibold text-primary-800 mb-2">Mateo Yepes Rojas</h3>
+                    <h3 class="text-xl font-semibold text-primary-800 dark:text-white mb-2">Mateo Yepes Rojas</h3>
                     <p class="text-accent-600 mb-4">Fundador y desarrollador front end y backend de lo que se lleva de la app</p>
-                    <p class="text-primary-600 mb-4">
+                    <p class="text-primary-600 dark:text-gray-300 mb-4">
                         Experto en idiomas y en diseño.
                     </p>
                     <div class="flex justify-center space-x-4">
-                        <a href="#" class="social-icon text-primary-600 hover:text-accent-600">
+                        <a href="#" class="social-icon text-primary-600 hover:text-accent-600 dark:text-white dark:hover:text-accent-400">
                             <i class="fab fa-linkedin text-xl"></i>
                         </a>
-                        <a href="#" class="social-icon text-primary-600 hover:text-accent-600">
+                        <a href="#" class="social-icon text-primary-600 hover:text-accent-600 dark:text-white dark:hover:text-accent-400">
                             <i class="fab fa-twitter text-xl"></i>
                         </a>
                     </div>
                 </div>
                 <div class="team-member text-center" data-aos="fade-up" data-aos-delay="300">
                     <div class="relative mb-6 overflow-hidden rounded-2xl">
-                        <img src="images/chimbi.jpg" alt="Team Member" class="w-full team-member-img">
+                        <img src="https://randomuser.me/api/portraits/women/1.jpg" alt="Team Member" class="w-full team-member-img">
                     </div>
-                    <h3 class="text-xl font-semibold text-primary-800 mb-2">Juan Felipe Jimenez</h3>
+                    <h3 class="text-xl font-semibold text-primary-800 dark:text-white mb-2">Juan Felipe Jimenez</h3>
                     <p class="text-accent-600 mb-4">Desarrollador backend y documentacion</p>
-                    <p class="text-primary-600 mb-4">
+                    <p class="text-primary-600 dark:text-gray-300 mb-4">
                         Especialista en bases de datos y estructuracion de paginas.
                     </p>
                     <div class="flex justify-center space-x-4">
-                        <a href="#" class="social-icon text-primary-600 hover:text-accent-600">
+                        <a href="#" class="social-icon text-primary-600 hover:text-accent-600 dark:text-white dark:hover:text-accent-400">
                             <i class="fab fa-linkedin text-xl"></i>
                         </a>
-                        <a href="#" class="social-icon text-primary-600 hover:text-accent-600">
+                        <a href="#" class="social-icon text-primary-600 hover:text-accent-600 dark:text-white dark:hover:text-accent-400">
                             <i class="fab fa-twitter text-xl"></i>
                         </a>
                     </div>
                 </div>
                 <div class="team-member text-center" data-aos="fade-up" data-aos-delay="400">
                     <div class="relative mb-6 overflow-hidden rounded-2xl">
-                        <img src="images/sebas.jpg" alt="Team Member" class="w-full team-member-img">
+                        <img src="https://randomuser.me/api/portraits/men/2.jpg" alt="Team Member" class="w-full team-member-img">
                     </div>
-                    <h3 class="text-xl font-semibold text-primary-800 mb-2">Sebastian Galeano</h3>
+                    <h3 class="text-xl font-semibold text-primary-800 dark:text-white mb-2">Sebastian Galeano</h3>
                     <p class="text-accent-600 mb-4">Director de documentos y actualizaciones</p>
-                    <p class="text-primary-600 mb-4">
+                    <p class="text-primary-600 dark:text-gray-300 mb-4">
                         Desarrollador front-end y especialista en la documentacion.
                     </p>
                     <div class="flex justify-center space-x-4">
-                        <a href="#" class="social-icon text-primary-600 hover:text-accent-600">
+                        <a href="#" class="social-icon text-primary-600 hover:text-accent-600 dark:text-white dark:hover:text-accent-400">
                             <i class="fab fa-linkedin text-xl"></i>
                         </a>
-                        <a href="#" class="social-icon text-primary-600 hover:text-accent-600">
+                        <a href="#" class="social-icon text-primary-600 hover:text-accent-600 dark:text-white dark:hover:text-accent-400">
                             <i class="fab fa-github text-xl"></i>
                         </a>
                     </div>
@@ -361,6 +403,7 @@
             </div>
         </div>
     </section>
+    
     <section class="games-section" id="juegos" data-aos="fade-up" data-aos-delay="100" >
         <h2 data-aos="fade-up" data-aos-delay="100" >¿Te gustan los juegos? ¡Aquí puedes divertirte un rato!</h2>
         <div class="games-grid" data-aos="fade-up" data-aos-delay="100" >
@@ -379,12 +422,60 @@
         </div>
     </section>
 
+    <!-- Maps Section -->
+    <section id="maps-section" class="py-20 bg-white dark:bg-gray-800">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-16">
+                <h2 class="text-3xl font-bold text-primary-800 dark:text-white mb-4" data-aos="fade-up">Nuestros Locales Asociados</h2>
+                <p class="text-lg text-primary-600 dark:text-gray-300 max-w-2xl mx-auto" data-aos="fade-up" data-aos-delay="100">
+                    Encuentra los mejores restaurantes y tiendas cerca de ti
+                </p>
+            </div>
+            
+            <div class="card-container" data-aos="fade-up">
+                <?php
+                    $lugares = [
+                        [
+                            "nombre" => "Tienda Don Pepe",
+                            "tipo" => "Tienda",
+                            "lat" => -12.0464,
+                            "lng" => -77.0428,
+                            "productos" => ["Arroz", "Azúcar", "Aceite"]
+                        ],
+                        [
+                            "nombre" => "Restaurante El Sabor",
+                            "tipo" => "Restaurante",
+                            "lat" => -12.0453,
+                            "lng" => -77.0311,
+                            "productos" => ["Ceviche", "Lomo Saltado", "Ají de gallina"]
+                        ]
+                    ];
+
+                    foreach ($lugares as $index => $lugar) {
+                        echo "<div class='map-card' onclick='toggleDetails($index)'>";
+                        echo "<h2 class='text-xl font-semibold text-primary-800 dark:text-white'>{$lugar['nombre']} <small class='text-accent-600'>({$lugar['tipo']})</small></h2>";
+                        echo "<div class='map-details' id='details-$index'>";
+                        echo "<strong class='text-primary-700 dark:text-gray-300'>Productos:</strong><ul class='list-disc pl-5 text-primary-600 dark:text-gray-300'>";
+                        foreach ($lugar['productos'] as $producto) {
+                            echo "<li>$producto</li>";
+                        }
+                        echo "</ul>";
+                        echo "<button onclick='panToLocation(event, {$lugar['lat']}, {$lugar['lng']})' class='bg-accent-600 hover:bg-accent-700 text-white font-medium py-2 px-4 rounded-lg transition duration-300 mt-3'>Ver en el mapa</button>";
+                        echo "</div></div>";
+                    }
+                ?>
+            </div>
+
+            <div id="map" class="mt-8 rounded-xl overflow-hidden shadow-xl" data-aos="fade-up" data-aos-delay="200"></div>
+        </div>
+    </section>
+
     <!-- Contact Section -->
     <section id="contact" class="py-20 bg-white dark:bg-gray-800">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="text-center mb-16">
-                <h2 class="text-3xl font-bold text-primary-800 mb-4" data-aos="fade-up">Contáctanos</h2>
-                <p class="text-lg text-primary-600 max-w-2xl mx-auto" data-aos="fade-up" data-aos-delay="100">
+                <h2 class="text-3xl font-bold text-primary-800 dark:text-white mb-4" data-aos="fade-up">Contáctanos</h2>
+                <p class="text-lg text-primary-600 dark:text-gray-300 max-w-2xl mx-auto" data-aos="fade-up" data-aos-delay="100">
                     ¿Tienes alguna pregunta? Estamos aquí para ayudarte
                 </p>
             </div>
@@ -395,8 +486,8 @@
                             <i class="fas fa-map-marker-alt text-2xl text-accent-600"></i>
                         </div>
                         <div>
-                            <h3 class="text-xl font-semibold text-primary-800 mb-2">Ubicación</h3>
-                            <p class="text-primary-600">SENA CTGI, Colombia</p>
+                            <h3 class="text-xl font-semibold text-primary-800 dark:text-white mb-2">Ubicación</h3>
+                            <p class="text-primary-600 dark:text-gray-300">SENA CTGI, Colombia</p>
                         </div>
                     </div>
                     <div class="flex items-start space-x-4">
@@ -404,8 +495,8 @@
                             <i class="fas fa-phone text-2xl text-accent-600"></i>
                         </div>
                         <div>
-                            <h3 class="text-xl font-semibold text-primary-800 mb-2">Teléfono</h3>
-                            <p class="text-primary-600">+57 3006518829</p>
+                            <h3 class="text-xl font-semibold text-primary-800 dark:text-white mb-2">Teléfono</h3>
+                            <p class="text-primary-600 dark:text-gray-300">+57 3006518829</p>
                         </div>
                     </div>
                     <div class="flex items-start space-x-4">
@@ -413,9 +504,9 @@
                             <i class="fas fa-envelope text-2xl text-accent-600"></i>
                         </div>
                         <div>
-                            <h3 class="text-xl font-semibold text-primary-800 mb-2">Email</h3>
-                            <p class="text-primary-600">sebasgf@gmail.com</p>
-                            <p class="text-primary-600">bmateo@gmail.com</p>
+                            <h3 class="text-xl font-semibold text-primary-800 dark:text-white mb-2">Email</h3>
+                            <p class="text-primary-600 dark:text-gray-300">sebasgf@gmail.com</p>
+                            <p class="text-primary-600 dark:text-gray-300">bmateo@gmail.com</p>
                         </div>
                     </div>
                     <div class="flex items-start space-x-4">
@@ -423,30 +514,30 @@
                             <i class="fas fa-clock text-2xl text-accent-600"></i>
                         </div>
                         <div>
-                            <h3 class="text-xl font-semibold text-primary-800 mb-2">Horario de Atención</h3>
-                            <p class="text-primary-600">Lunes a Viernes: 9:00 AM - 6:00 PM</p>
-                            <p class="text-primary-600">Sábados: 10:00 AM - 2:00 PM</p>
+                            <h3 class="text-xl font-semibold text-primary-800 dark:text-white mb-2">Horario de Atención</h3>
+                            <p class="text-primary-600 dark:text-gray-300">Lunes a Viernes: 9:00 AM - 6:00 PM</p>
+                            <p class="text-primary-600 dark:text-gray-300">Sábados: 10:00 AM - 2:00 PM</p>
                         </div>
                     </div>
                 </div>
-                <form class="space-y-6 bg-white rounded-2xl p-8 shadow-lg" data-aos="fade-left">
+                <form class="space-y-6 bg-white dark:bg-gray-700 rounded-2xl p-8 shadow-lg" data-aos="fade-left">
                     <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
                         <div>
-                            <label class="block text-sm font-medium text-primary-600 mb-2">Nombre</label>
-                            <input type="text" class="w-full px-4 py-3 rounded-xl border border-gray-300 focus:outline-none focus:ring-2 focus:ring-accent-500">
+                            <label class="block text-sm font-medium text-primary-600 dark:text-gray-300 mb-2">Nombre</label>
+                            <input type="text" class="w-full px-4 py-3 rounded-xl border border-gray-300 dark:border-gray-600 focus:outline-none focus:ring-2 focus:ring-accent-500 bg-white dark:bg-gray-800">
                         </div>
                         <div>
-                            <label class="block text-sm font-medium text-primary-600 mb-2">Email</label>
-                            <input type="email" class="w-full px-4 py-3 rounded-xl border border-gray-300 focus:outline-none focus:ring-2 focus:ring-accent-500">
+                            <label class="block text-sm font-medium text-primary-600 dark:text-gray-300 mb-2">Email</label>
+                            <input type="email" class="w-full px-4 py-3 rounded-xl border border-gray-300 dark:border-gray-600 focus:outline-none focus:ring-2 focus:ring-accent-500 bg-white dark:bg-gray-800">
                         </div>
                     </div>
                     <div>
-                        <label class="block text-sm font-medium text-primary-600 mb-2">Asunto</label>
-                        <input type="text" class="w-full px-4 py-3 rounded-xl border border-gray-300 focus:outline-none focus:ring-2 focus:ring-accent-500">
+                        <label class="block text-sm font-medium text-primary-600 dark:text-gray-300 mb-2">Asunto</label>
+                        <input type="text" class="w-full px-4 py-3 rounded-xl border border-gray-300 dark:border-gray-600 focus:outline-none focus:ring-2 focus:ring-accent-500 bg-white dark:bg-gray-800">
                     </div>
                     <div>
-                        <label class="block text-sm font-medium text-primary-600 mb-2">Mensaje</label>
-                        <textarea rows="5" class="w-full px-4 py-3 rounded-xl border border-gray-300 focus:outline-none focus:ring-2 focus:ring-accent-500"></textarea>
+                        <label class="block text-sm font-medium text-primary-600 dark:text-gray-300 mb-2">Mensaje</label>
+                        <textarea rows="5" class="w-full px-4 py-3 rounded-xl border border-gray-300 dark:border-gray-600 focus:outline-none focus:ring-2 focus:ring-accent-500 bg-white dark:bg-gray-800"></textarea>
                     </div>
                     <button type="submit" class="w-full px-6 py-3 bg-accent-600 text-white rounded-2xl hover:bg-accent-700 transition duration-300 transform hover:scale-105">
                         Enviar mensaje
@@ -507,77 +598,4 @@
     </footer>
 
     <!-- Back to Top Button -->
-    <button id="back-to-top" class="fixed bottom-8 right-8 bg-accent-600 text-white p-4 rounded-full shadow-lg hidden hover:bg-accent-700 transition duration-300 transform hover:scale-110">
-        <i class="fas fa-arrow-up"></i>
-    </button>
-
-    <script>
-        // Initialize AOS
-        AOS.init({
-            duration: 1000,
-            once: true
-        });
-
-        // Mobile menu toggle
-        const mobileMenuButton = document.getElementById('mobile-menu-button');
-        const mobileMenu = document.getElementById('mobile-menu');
-
-        mobileMenuButton.addEventListener('click', () => {
-            mobileMenu.classList.toggle('hidden');
-        });
-
-        // Back to top button
-        const backToTopButton = document.getElementById('back-to-top');
-
-        window.addEventListener('scroll', () => {
-            if (window.pageYOffset > 300) {
-                backToTopButton.classList.remove('hidden');
-            } else {
-                backToTopButton.classList.add('hidden');
-            }
-        });
-
-        backToTopButton.addEventListener('click', () => {
-            window.scrollTo({
-                top: 0,
-                behavior: 'smooth'
-            });
-        });
-
-        // Smooth scroll for navigation links
-        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-            anchor.addEventListener('click', function (e) {
-                e.preventDefault();
-                const target = document.querySelector(this.getAttribute('href'));
-                if (target) {
-                    target.scrollIntoView({
-                        behavior: 'smooth'
-                    });
-                    // Close mobile menu if open
-                    mobileMenu.classList.add('hidden');
-                }
-            });
-        });
-
-        // Form submission handling with animation
-        const forms = document.querySelectorAll('form');
-        forms.forEach(form => {
-            form.addEventListener('submit', (e) => {
-                e.preventDefault();
-                const button = form.querySelector('button[type="submit"]');
-                const originalText = button.innerHTML;
-                button.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Enviando...';
-                
-                // Simulate form submission
-                setTimeout(() => {
-                    button.innerHTML = '<i class="fas fa-check"></i> ¡Enviado!';
-                    form.reset();
-                    setTimeout(() => {
-                        button.innerHTML = originalText;
-                    }, 2000);
-                }, 1500);
-            });
-        });
-    </script>
-</body>
-</html>
+    <button id="back-to-top" class="fixed bottom
